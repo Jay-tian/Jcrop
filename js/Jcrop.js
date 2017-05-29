@@ -106,8 +106,12 @@
             });
             stages.sort(function(a,b){ return a.priority - b.priority; });
             // Find the first one that supports this element
+            console.log(stages);
             for(var i=0,l=stages.length;i<l;i++){
                 if (stages[i].isSupported(el,options)){
+                    console.log('支持的创建策略');
+                    console.log(stages[i]);
+                    console.log(i);
                     stages[i].create(el,options,function(obj,opt){
                         if (typeof callback == 'function') callback(obj,opt);
                     });
@@ -149,6 +153,7 @@
         },
         prototype: {
             attach: function(core){
+                console.log(this);
                 this.init(core);
                 core.ui.stage = this;
             },
@@ -158,6 +163,9 @@
             },
             getElement: function(){
                 return this.element;
+            },
+            init: function (core) {
+                this.core = core;
             }
         }
     });
@@ -228,9 +236,6 @@
     });
 
     $.extend(CanvasStage.prototype,{
-        init: function(core){
-            this.core = core;
-        },
         // setOffset: function(x,y) {{{
         setOffset: function(x,y) {
             this.offset = [x,y];
@@ -2450,10 +2455,11 @@
                     if (selection) delete(options.setSelect);
 
                     var obj = $.Jcrop.attach(stage.element,options);
-
+                    console.log(stage);
+                    console.log('调用方法创建');
                     if (typeof stage.attach == 'function')
                         stage.attach(obj);
-
+                    console.log('调用方法');
                     $t.data('Jcrop',obj);
 
                     if (selection) {
