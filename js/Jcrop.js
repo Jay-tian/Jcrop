@@ -210,7 +210,10 @@
             var opt = $.extend({},options);
             $.Jcrop.component.ImageLoader.attach(el,function(w,h){
                 var obj = new CanvasStage;
-                $el.hide();
+                var w = $el.width();
+                var h = $el.height();
+                console.log('防止隐藏的元素获取高款款值有误差');
+                $el.width(w).height(h).hide();
                 obj.createCanvas(el,w,h);
                 $el.before(obj.element);
                 obj.imgsrc = el;
@@ -1045,7 +1048,7 @@
         prototype: {
             getDimensions: function(){
                 var el = this.element;
-
+                console.log('获得元素高宽');
                 if ($(el).width())
                     return [ $(el).width(), $(el).height() ];
 
@@ -2467,9 +2470,9 @@
         });
     };
 
-  /* Modernizr 2.7.1 (Custom Build) | MIT & BSD
-   * Build: http://modernizr.com/download/#-csstransforms-canvas-canvastext-draganddrop-inlinesvg-svg-svgclippaths-touch-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-url_data_uri
-   */
+    /* Modernizr 2.7.1 (Custom Build) | MIT & BSD
+     * Build: http://modernizr.com/download/#-csstransforms-canvas-canvastext-draganddrop-inlinesvg-svg-svgclippaths-touch-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-url_data_uri
+     */
     ;
 
     var Modernizr = (function( window, document, undefined ) {
